@@ -1,54 +1,32 @@
-/* --- UNIVERSAL CURRENCY CONVERTER --- */
+/* --- VPN-EXCLUSIVE CURRENCY CONVERTER --- */
 // 1. Accepts Manual Override (For Simulator)
-// 2. PRIORITIZES VPN/IP DETECTION (Best for Testing)
-// 3. Fallback to Timezone if API fails
-// 4. Applies Strict Rounding Rules
+// 2. ONLY uses IP Address (Best for VPN Testing)
+// 3. Applies Strict Rounding Rules
 
 async function updateCurrency(manualCountry = null) {
     console.log("--- Currency Script Started ---");
 
     let countryCode = manualCountry;
 
-    // --- STEP 1: AUTO-DETECT (Only if no manual override provided) ---
+    // --- STEP 1: AUTO-DETECT (IP ADDRESS ONLY) ---
+    // We removed the Timezone check completely.
     if (!countryCode) {
-        
-        // A. TRY API FIRST (This makes VPNs work)
         try {
-            console.log("Attempting detection via IP...");
+            console.log("Detecting location via IP...");
             const res = await fetch('https://api.country.is');
             const data = await res.json();
             countryCode = data.country; 
-            console.log("Detected via IP:", countryCode);
+            console.log("Detected IP Location:", countryCode);
         } catch (e) {
-            console.log("IP Detection failed (AdBlocker?). Switching to Timezone.");
+            console.log("IP Detection failed (AdBlocker?). Defaulting to US.");
+            countryCode = 'US';
         }
-
-        // B. TIMEZONE BACKUP (Only if API failed)
-        if (!countryCode) {
-            try {
-                const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-                
-                if (timeZone === "Asia/Dhaka") countryCode = "BD";
-                else if (timeZone === "Europe/London") countryCode = "GB";
-                else if (timeZone.startsWith("Australia/")) countryCode = "AU";
-                else if (timeZone.startsWith("Asia/Tokyo")) countryCode = "JP";
-                else if (timeZone.startsWith("Asia/Seoul")) countryCode = "KR";
-                else if (timeZone.startsWith("America/Mexico_City")) countryCode = "MX";
-                else if (timeZone.startsWith("Asia/Shanghai")) countryCode = "CN";
-                else if (timeZone.startsWith("Europe/")) countryCode = "DE"; 
-            } catch (e) {
-                console.log("Timezone check failed.");
-            }
-        }
-
-        // C. FINAL FALLBACK
-        if (!countryCode) countryCode = 'US';
     }
 
-    console.log("Target Country:", countryCode);
+    console.log("Final Target Country:", countryCode);
 
     // --- STEP 2: HANDLE USD RESET ---
-    // If country is US, we must reset the text back to plain Dollars
+    // If country is US (or detection failed), reset text to dollars
     if (countryCode === 'US' || countryCode === 'USD') {
         document.querySelectorAll('.dynamic-price').forEach(el => {
             const usd = parseFloat(el.getAttribute('data-usd'));
@@ -65,7 +43,7 @@ async function updateCurrency(manualCountry = null) {
         'BD': 'BDT', 'GB': 'GBP', 'CA': 'CAD', 
         'JP': 'JPY', 'KR': 'KRW', 'CN': 'CNY', 
         'MX': 'MXN', 'AU': 'AUD', 
-        // HUGE EUROPE LIST
+        // EUROPE LIST
         'DE': 'EUR', 'FR': 'EUR', 'IT': 'EUR', 'ES': 'EUR', 'NL': 'EUR', 
         'BE': 'EUR', 'AT': 'EUR', 'IE': 'EUR', 'PT': 'EUR', 'GR': 'EUR', 
         'FI': 'EUR', 'EE': 'EUR', 'LV': 'EUR', 'LT': 'EUR', 'SK': 'EUR', 
