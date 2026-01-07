@@ -1,70 +1,83 @@
-/* --- LIVE CURRENCY CONVERTER (VPN-Friendly Version) --- */
+/* --- ULTIMATE CURRENCY CONVERTER (Final Fix) --- */
 
 async function updateCurrency() {
+    console.log("--- Starting Currency Check ---");
+
+    let countryCode = null;
+
+    // 1. GET LOCATION (With 3 Backups)
     try {
-        console.log("Creating currency request...");
-
-        // 1. Get User Location Data (Using ipwhois.app which is more VPN friendly)
-        const response = await fetch('https://ipwhois.app/json/');
-        const data = await response.json();
-        
-        console.log("Detected Country:", data.country);
-        console.log("Detected Currency:", data.currency);
-
-        const userCurrency = data.currency; // e.g., "BDT", "EUR", "USD"
-
-        // If something went wrong or user is in US, stop here.
-        if (!userCurrency || userCurrency === 'USD') {
-            console.log("User is in US or API failed. Keeping USD.");
-            return;
+        const res1 = await fetch('https://ipapi.co/json/');
+        const data1 = await res1.json();
+        countryCode = data1.country_code;
+    } catch (e) {
+        try {
+            const res2 = await fetch('https://api.country.is');
+            const data2 = await res2.json();
+            countryCode = data2.country;
+        } catch (e2) {
+            try {
+                const res3 = await fetch('https://ipwhois.app/json/');
+                const data3 = await res3.json();
+                countryCode = data3.country_code;
+            } catch (e3) {
+                console.error("All APIs failed. Staying in USD.");
+                return;
+            }
         }
+    }
 
-        // 2. Get LIVE Exchange Rates (Base: USD)
-        const rateResponse = await fetch('https://open.er-api.com/v6/latest/USD');
-        const rateData = await rateResponse.json();
-        
+    // SAFETY FIX: Force uppercase (e.g. "bd" -> "BD")
+    if (!countryCode) return;
+    countryCode = countryCode.toUpperCase();
+    
+    console.log("Detected Country:", countryCode);
+
+    // 2. MAP COUNTRY -> CURRENCY
+    const countryToCurrency = {
+        'BD': 'BDT', 'IN': 'INR', 'GB': 'GBP',
+        'DE': 'EUR', 'FR': 'EUR', 'IT': 'EUR', 'ES': 'EUR', 'NL': 'EUR',
+        'AU': 'AUD', 'CA': 'CAD', 'JP': 'JPY', 'CN': 'CNY', 'BR': 'BRL'
+    };
+
+    const userCurrency = countryToCurrency[countryCode] || 'USD';
+
+    if (userCurrency === 'USD') return;
+
+    // 3. GET RATE & CONVERT
+    try {
+        const rateRes = await fetch('https://open.er-api.com/v6/latest/USD');
+        const rateData = await rateRes.json();
         const liveRate = rateData.rates[userCurrency];
-        console.log("Exchange Rate for " + userCurrency + ": " + liveRate);
 
         if (!liveRate) return;
 
-        // 3. Define Symbols & Formatting
-        const formattingConfig = {
-            'EUR': { symbol: '€', position: 'before' },
-            'GBP': { symbol: '£', position: 'before' },
-            'BDT': { symbol: '৳', position: 'after' },   
-            'INR': { symbol: '₹', position: 'before' },
-            'CAD': { symbol: 'CA$', position: 'before' },
-            'AUD': { symbol: 'AU$', position: 'before' },
-            'JPY': { symbol: '¥', position: 'before' },
-            'CNY': { symbol: '¥', position: 'before' },
-            'RUB': { symbol: '₽', position: 'after' },
-            'BRL': { symbol: 'R$', position: 'before' },
+        const formatting = {
+            'EUR': { symbol: '€', pos: 'before' },
+            'GBP': { symbol: '£', pos: 'before' },
+            'BDT': { symbol: '৳', pos: 'after' },
+            'INR': { symbol: '₹', pos: 'before' },
+            'AUD': { symbol: 'AU$', pos: 'before' },
+            'CAD': { symbol: 'CA$', pos: 'before' },
         };
+        
+        const format = formatting[userCurrency] || { symbol: userCurrency + ' ', pos: 'before' };
 
-        const format = formattingConfig[userCurrency] || { symbol: userCurrency + ' ', position: 'before' };
-
-        // 4. Update Prices
         document.querySelectorAll('.dynamic-price').forEach(el => {
             const usdAmount = parseFloat(el.getAttribute('data-usd'));
-            
-            // Round up for cleaner prices (e.g. 122.5 -> 123)
-            const convertedAmount = Math.ceil(usdAmount * liveRate);
-            const formattedNumber = convertedAmount.toLocaleString();
+            const converted = Math.ceil(usdAmount * liveRate);
+            const formattedNum = converted.toLocaleString();
 
-            if (format.position === 'before') {
-                el.textContent = `${format.symbol}${formattedNumber}`;
+            if (format.pos === 'before') {
+                el.textContent = `${format.symbol}${formattedNum}`;
             } else {
-                el.textContent = `${formattedNumber}${format.symbol}`;
+                el.textContent = `${formattedNum}${format.symbol}`;
             }
         });
-        
-        console.log("Prices updated successfully.");
 
-    } catch (error) {
-        console.error("Currency converter error:", error);
+    } catch (err) {
+        console.error("Rate API failed:", err);
     }
 }
 
-// Run immediately
 updateCurrency();
