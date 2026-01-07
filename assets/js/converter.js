@@ -1,7 +1,8 @@
 /* --- UNIVERSAL CURRENCY CONVERTER --- */
 // 1. Accepts Manual Override (For Simulator)
-// 2. Auto-Detects via Timezone/API (For Main Site)
-// 3. Applies Strict Rounding
+// 2. PRIORITIZES VPN/IP DETECTION (Best for Testing)
+// 3. Fallback to Timezone if API fails
+// 4. Applies Strict Rounding Rules
 
 async function updateCurrency(manualCountry = null) {
     console.log("--- Currency Script Started ---");
@@ -10,44 +11,50 @@ async function updateCurrency(manualCountry = null) {
 
     // --- STEP 1: AUTO-DETECT (Only if no manual override provided) ---
     if (!countryCode) {
-        // A. Timezone Check
+        
+        // A. TRY API FIRST (This makes VPNs work)
         try {
-            const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-            if (timeZone === "Asia/Dhaka") countryCode = "BD";
-            else if (timeZone === "Europe/London") countryCode = "GB";
-            else if (timeZone.startsWith("Australia/")) countryCode = "AU";
-            else if (timeZone.startsWith("Asia/Tokyo")) countryCode = "JP";
-            else if (timeZone.startsWith("Asia/Seoul")) countryCode = "KR";
-            else if (timeZone.startsWith("America/Mexico_City")) countryCode = "MX";
-            else if (timeZone.startsWith("Asia/Shanghai")) countryCode = "CN";
-            // Rough check for Europe
-            else if (timeZone.startsWith("Europe/")) countryCode = "DE"; 
+            console.log("Attempting detection via IP...");
+            const res = await fetch('https://api.country.is');
+            const data = await res.json();
+            countryCode = data.country; 
+            console.log("Detected via IP:", countryCode);
         } catch (e) {
-            console.log("Timezone check failed.");
+            console.log("IP Detection failed (AdBlocker?). Switching to Timezone.");
         }
 
-        // B. API Backup
-        if (!countryCode || countryCode === "DE") {
+        // B. TIMEZONE BACKUP (Only if API failed)
+        if (!countryCode) {
             try {
-                const res = await fetch('https://api.country.is');
-                const data = await res.json();
-                countryCode = data.country; 
+                const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                
+                if (timeZone === "Asia/Dhaka") countryCode = "BD";
+                else if (timeZone === "Europe/London") countryCode = "GB";
+                else if (timeZone.startsWith("Australia/")) countryCode = "AU";
+                else if (timeZone.startsWith("Asia/Tokyo")) countryCode = "JP";
+                else if (timeZone.startsWith("Asia/Seoul")) countryCode = "KR";
+                else if (timeZone.startsWith("America/Mexico_City")) countryCode = "MX";
+                else if (timeZone.startsWith("Asia/Shanghai")) countryCode = "CN";
+                else if (timeZone.startsWith("Europe/")) countryCode = "DE"; 
             } catch (e) {
-                // Default to US if everything fails
-                countryCode = 'US';
+                console.log("Timezone check failed.");
             }
         }
+
+        // C. FINAL FALLBACK
+        if (!countryCode) countryCode = 'US';
     }
 
     console.log("Target Country:", countryCode);
 
-    // --- STEP 2: HANDLE USD RESET (Crucial for Simulator) ---
-    // If country is US, we must reset the text back to dollars
+    // --- STEP 2: HANDLE USD RESET ---
+    // If country is US, we must reset the text back to plain Dollars
     if (countryCode === 'US' || countryCode === 'USD') {
         document.querySelectorAll('.dynamic-price').forEach(el => {
             const usd = parseFloat(el.getAttribute('data-usd'));
-            // Check for /mo suffix
+            // Check for /mo suffix inside the HTML
             const suffix = el.innerHTML.includes('/mo') ? '<span style="font-size:1rem; color:#888;">/mo</span>' : '';
+            // Reset text
             el.innerHTML = `$${usd.toLocaleString()}${suffix}`;
         });
         return;
@@ -68,12 +75,12 @@ async function updateCurrency(manualCountry = null) {
     const userCurrency = allowedCountries[countryCode];
 
     if (!userCurrency) {
-        // If not in VIP list, treat as USD
+        // If detected country is not in our VIP list, treat as USD
         updateCurrency('US'); 
         return;
     }
 
-    // --- STEP 4: GET RATES ---
+    // --- STEP 4: GET LIVE RATES ---
     try {
         const rateRes = await fetch('https://open.er-api.com/v6/latest/USD');
         const rateData = await rateRes.json();
@@ -81,7 +88,7 @@ async function updateCurrency(manualCountry = null) {
 
         if (!liveRate) return;
 
-        // Symbols
+        // Symbols Configuration
         const symbols = {
             'EUR': { s: '€', pos: 'before' },
             'GBP': { s: '£', pos: 'before' },
@@ -102,27 +109,27 @@ async function updateCurrency(manualCountry = null) {
             let finalPrice;
 
             if (rawPrice > 100000) {
-                // e.g. BDT: 146,400 -> 145,000
+                // Massive numbers (e.g. BDT: 146,400 -> 145,000)
                 finalPrice = Math.round(rawPrice / 5000) * 5000;
             } 
             else if (rawPrice > 10000) {
-                // e.g. INR/JPY: 12,450 -> 12,000
+                // Large numbers (e.g. INR/JPY: 12,450 -> 12,000)
                 finalPrice = Math.round(rawPrice / 1000) * 1000;
             } 
             else if (rawPrice > 1000) {
-                // e.g. EUR/GBP SaaS: 1,120 -> 1,100 (Nearest 50)
+                // Mid-High numbers (e.g. EUR SaaS: 1,120 -> 1,100)
                 finalPrice = Math.round(rawPrice / 50) * 50;
             } 
             else if (rawPrice > 100) {
-                // e.g. EUR Web: 233 -> 230 (Nearest 10)
+                // Standard numbers (e.g. EUR Web: 233 -> 230)
                 finalPrice = Math.round(rawPrice / 10) * 10;
             } 
             else if (rawPrice > 30) {
-                // e.g. EUR Growth Plan: 46 -> 45 (Nearest 5)
+                // Subscription numbers (e.g. EUR Growth: 46 -> 45)
                 finalPrice = Math.round(rawPrice / 5) * 5;
             }
             else {
-                // Tiny Subs: Keep precise
+                // Tiny numbers: Just remove decimals
                 finalPrice = Math.ceil(rawPrice);
             }
 
@@ -145,5 +152,5 @@ async function updateCurrency(manualCountry = null) {
     }
 }
 
-// Auto-run on load (Uses auto-detection because no argument is passed)
+// Auto-run on load
 updateCurrency();
