@@ -14,8 +14,7 @@
         /* --- Animation Core (Pure Slow & Smooth) --- */
         .fade-in {
             opacity: 0;
-            transform: translateY(50px); /* Starts slightly lower for a longer drift */
-            /* 2.0s duration = Very slow. The cubic-bezier makes the landing soft. */
+            transform: translateY(50px);
             transition: opacity 2.0s cubic-bezier(0.19, 1, 0.22, 1), transform 2.0s cubic-bezier(0.19, 1, 0.22, 1);
             will-change: opacity, transform;
         }
@@ -47,7 +46,7 @@
         }
 
         .services-desc {
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto 4rem;
             color: var(--text-muted);
             text-align: center;
@@ -57,14 +56,11 @@
 
         /* --- Card Styles (Fixed Size) --- */
         .glass-card {
-            /* Hover is fast (0.3s), Loading is slow (inherits 2.0s from .fade-in) */
             transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, opacity 2.0s;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             padding: 2rem;
-            
-            /* SIZING RULES */
             flex: 0 1 360px;
             min-height: 400px;
             width: 100%;
@@ -74,7 +70,6 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
             border-color: rgba(255, 255, 255, 0.2);
-            /* Reset transition on hover so it reacts instantly to your mouse */
             transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
         
@@ -101,67 +96,60 @@
 
 <section class="services-section">
     <h1 class="section-title fade-in">
-        What We <span class="gradient-text">Automate</span>
+        End-to-End <span class="gradient-text">Digital Solutions</span>
     </h1>
 
     <p class="services-desc fade-in">
-        We design, build, and maintain automation systems that eliminate manual work,
-        reduce errors, and scale your business — without hiring more people.
+        We bridge the gap between creative ideas and technical reality. From building your first mobile app to automating your entire sales funnel, we combine expert developer logic with the speed of AI.
     </p>
 
     <div class="grid-3">
 
         <div class="glass-card fade-in">
-            <i class="fas fa-diagram-project" style="font-size: 2.5rem; color: var(--neon-purple); margin-bottom: 1.5rem;"></i>
+            <i class="fas fa-laptop-code" style="font-size: 2.5rem; color: var(--neon-purple); margin-bottom: 1.5rem;"></i>
+            <h3>Web Apps & Sites</h3>
+            <p style="color: var(--text-muted); margin-top: 1rem; line-height: 1.6;">
+                High-performance static websites, dynamic web applications, and converting landing pages. Built with clean HTML/CSS/JS or modern frameworks.
+            </p>
+        </div>
+
+        <div class="glass-card fade-in">
+            <i class="fas fa-mobile-screen-button" style="font-size: 2.5rem; color: var(--neon-pink); margin-bottom: 1.5rem;"></i>
+            <h3>Android & iOS Apps</h3>
+            <p style="color: var(--text-muted); margin-top: 1rem; line-height: 1.6;">
+                Native or cross-platform mobile applications. We turn your website or business idea into a user-friendly app available on the Play Store and App Store.
+            </p>
+        </div>
+
+        <div class="glass-card fade-in">
+            <i class="fas fa-server" style="font-size: 2.5rem; color: var(--neon-purple); margin-bottom: 1.5rem;"></i>
+            <h3>Backend Systems</h3>
+            <p style="color: var(--text-muted); margin-top: 1rem; line-height: 1.6;">
+                Robust Python & Django admin panels to manage your business data. Secure, scalable, and logically architected for stability.
+            </p>
+        </div>
+
+        <div class="glass-card fade-in">
+            <i class="fas fa-robot" style="font-size: 2.5rem; color: var(--neon-pink); margin-bottom: 1.5rem;"></i>
             <h3>Workflow Automation</h3>
             <p style="color: var(--text-muted); margin-top: 1rem; line-height: 1.6;">
-                Automate repetitive business processes such as lead handling, data syncing,
-                notifications, approvals, and task assignments using secure automation workflows.
+                Powered by n8n. We automate repetitive tasks like data entry, email filtering, and lead management so you can focus on strategy.
             </p>
         </div>
 
         <div class="glass-card fade-in">
-            <i class="fas fa-users-gear" style="font-size: 2.5rem; color: var(--neon-pink); margin-bottom: 1.5rem;"></i>
-            <h3>CRM & Sales Automation</h3>
+            <i class="fas fa-comments-dollar" style="font-size: 2.5rem; color: var(--neon-purple); margin-bottom: 1.5rem;"></i>
+            <h3>AI Sales Agents</h3>
             <p style="color: var(--text-muted); margin-top: 1rem; line-height: 1.6;">
-                Automatically capture leads, update CRM records, trigger follow-ups,
-                and sync customer data across platforms like HubSpot, Sheets, Notion, or Airtable.
+                24/7 intelligent chatbots for Facebook, Instagram, and WhatsApp. They answer queries, book appointments, and close sales automatically.
             </p>
         </div>
 
         <div class="glass-card fade-in">
-            <i class="fas fa-brain" style="font-size: 2.5rem; color: var(--neon-purple); margin-bottom: 1.5rem;"></i>
-            <h3>AI-Powered Workflows</h3>
+            <i class="fas fa-brain" style="font-size: 2.5rem; color: var(--neon-pink); margin-bottom: 1.5rem;"></i>
+            <h3>Custom AI & LLMs</h3>
             <p style="color: var(--text-muted); margin-top: 1rem; line-height: 1.6;">
-                Enhance automations with AI for tasks like content generation,
-                message classification, document processing, and smart decision routing.
-            </p>
-        </div>
-
-        <div class="glass-card fade-in">
-            <i class="fas fa-plug" style="font-size: 2.5rem; color: var(--neon-pink); margin-bottom: 1.5rem;"></i>
-            <h3>API & Tool Integrations</h3>
-            <p style="color: var(--text-muted); margin-top: 1rem; line-height: 1.6;">
-                Connect your existing tools using APIs — including email platforms,
-                payment systems, databases, internal tools, and third-party services.
-            </p>
-        </div>
-
-        <div class="glass-card fade-in">
-            <i class="fas fa-tools" style="font-size: 2.5rem; color: var(--neon-purple); margin-bottom: 1.5rem;"></i>
-            <h3>Monitoring & Maintenance</h3>
-            <p style="color: var(--text-muted); margin-top: 1rem; line-height: 1.6;">
-                We monitor workflows, handle failures, apply updates,
-                and ensure automations continue running reliably as your business grows.
-            </p>
-        </div>
-
-        <div class="glass-card fade-in">
-            <i class="fas fa-building" style="font-size: 2.5rem; color: var(--neon-pink); margin-bottom: 1.5rem;"></i>
-            <h3>Custom Enterprise Automation</h3>
-            <p style="color: var(--text-muted); margin-top: 1rem; line-height: 1.6;">
-                Large or complex automation systems with advanced logic,
-                higher workflow limits, SLAs, and dedicated support — built to scale.
+                Specialized AI models trained on your specific data. Perfect for legal analysis, medical assistance, or complex customer support.
             </p>
         </div>
 

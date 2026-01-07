@@ -28,12 +28,23 @@
         /* Terms Specific Styling */
         .terms-content h3 {
             color: var(--neon-purple);
-            margin-top: 2rem;
-            margin-bottom: 0.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
         }
         .terms-content p {
             line-height: 1.8;
             margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+        .terms-content ul {
+            list-style: disc;
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+        }
+        .terms-content li {
+            margin-bottom: 0.5rem;
         }
     </style>
 </head>
@@ -44,100 +55,77 @@
     <section style="padding: 10rem 2rem 5rem;">
         <div class="glass-card fade-in terms-content" style="max-width: 900px; margin: 0 auto; padding: 4rem;">
             <h1 class="section-title" style="text-align: left; margin-bottom: 1rem;">Terms & <span class="gradient-text">Conditions</span></h1>
-            <p style="color: var(--text-muted); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 2rem; margin-bottom: 2rem;">
+            <p style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 2rem; margin-bottom: 2rem;">
                 Effective Date: January 2025
             </p>
 
             <h3>1. Acceptance of Terms</h3>
-            <p style="color: var(--text-muted);">
-                By accessing or using Cyphacore AI services, you agree to be bound by these Terms & Conditions.
-                If you do not agree, you must not use our services.
+            <p>
+                By engaging with Cyphacore AI for development, automation, or consulting services, you agree to be bound by these Terms & Conditions. If you do not agree, you must not use our services.
             </p>
 
             <h3>2. Scope of Services</h3>
-            <p style="color: var(--text-muted);">
-                Cyphacore AI provides automation development, workflow optimization, AI integration,
-                and related consulting services.
-                Each pricing plan includes a clearly defined number of automation workflows and support limits.
-            </p>
-            <p style="color: var(--text-muted);">
-                Any request beyond the agreed scope (additional workflows, complex logic changes,
-                new integrations, or major redesigns) will require an additional fee or plan upgrade.
-            </p>
-
-            <h3>3. Workflow Limits & Fair Use</h3>
-            <p style="color: var(--text-muted);">
-                Each automation workflow is defined as a single logical process.
-                Excessive complexity, chaining, or expansion beyond reasonable limits may be considered
-                a separate workflow.
-            </p>
-            <p style="color: var(--text-muted);">
-                Cyphacore AI reserves the right to refuse unreasonable requests that exceed fair use
-                under the selected plan.
+            <p>Cyphacore AI provides two distinct categories of services:</p>
+            <ul>
+                <li><strong>Development Services:</strong> One-time builds including Websites, Mobile Applications (Android/iOS), Custom Software, and standalone AI Agents.</li>
+                <li><strong>Automation Services:</strong> Recurring subscription-based services for workflow automation (n8n), maintenance, and hosting.</li>
+            </ul>
+            <p>
+                Any request beyond the agreed scope (e.g., additional app features, new workflow logic, or extra integrations) will be treated as a Change Request and may incur additional fees.
             </p>
 
-            <h3>4. Payment & Billing</h3>
-            <p style="color: var(--text-muted);">
-                Setup fees are one-time and non-refundable once work has begun.
-                Monthly maintenance fees are billed in advance.
+            <h3>3. Payment Terms</h3>
+            <p>
+                <strong>For Development Projects:</strong> A deposit (typically 50%) is required to commence work. The remaining balance is due upon project completion or defined milestones. Code and assets are released only upon full payment.
             </p>
-            <p style="color: var(--text-muted);">
-                Failure to pay may result in suspension or termination of services without prior notice.
-            </p>
-
-            <h3>5. Maintenance & Support</h3>
-            <p style="color: var(--text-muted);">
-                Maintenance covers bug fixes, minor updates, and monitoring of existing workflows.
-                It does not include new feature development or major workflow restructuring.
-            </p>
-            <p style="color: var(--text-muted);">
-                Support response times vary by plan. Priority and SLA-based support is only available
-                to eligible plans.
+            <p>
+                <strong>For Automation Subscriptions:</strong> Monthly fees are billed in advance. Failure to pay may result in the immediate suspension of automation workflows and support. Setup fees are non-refundable once work has commenced.
             </p>
 
-            <h3>6. Intellectual Property</h3>
-            <p style="color: var(--text-muted);">
-                All custom automation logic, templates, scripts, and system architecture created by
-                Cyphacore AI remain our intellectual property unless otherwise agreed in writing.
+            <h3>4. Intellectual Property Rights</h3>
+            <p>
+                <strong>Client Ownership:</strong> Upon full payment, the Client owns all rights, title, and interest in the custom code, designs, and content created specifically for their project (e.g., your Website or Mobile App source code).
             </p>
-            <p style="color: var(--text-muted);">
-                Clients retain full ownership of their data and credentials.
-            </p>
-
-            <h3>7. Confidentiality</h3>
-            <p style="color: var(--text-muted);">
-                Both parties agree to keep confidential information private and not disclose it to
-                third parties without consent.
+            <p>
+                <strong>Cyphacore IP:</strong> We retain ownership of our background technology, pre-existing libraries, automation frameworks, and reusable tools used to deliver the service. You are granted a non-exclusive, perpetual license to use these components within your project.
             </p>
 
-            <h3>8. Service Availability</h3>
-            <p style="color: var(--text-muted);">
-                While we strive for high availability, Cyphacore AI does not guarantee uninterrupted service.
-                Downtime caused by third-party platforms, APIs, or hosting providers is not our responsibility.
+            <h3>5. Workflow Limits & Fair Use</h3>
+            <p>
+                For Automation Plans, "Workflows" are defined by logical processes. Cyphacore AI reserves the right to limit or renegotiate plans if a client's usage (e.g., server load, API calls) significantly exceeds standard fair use policies or impacts other clients.
             </p>
 
-            <h3>9. Termination</h3>
-            <p style="color: var(--text-muted);">
-                Either party may terminate services with written notice.
-                Cyphacore AI reserves the right to immediately suspend services for abuse,
-                non-payment, or violation of these terms.
+            <h3>6. Revisions & Approvals</h3>
+            <p>
+                Development projects include a set number of revision rounds as defined in the specific proposal. Additional revisions outside the original scope are billed at our standard hourly rate. Once a milestone is approved by the Client, further changes to that milestone are considered new work.
             </p>
 
-            <h3>10. Limitation of Liability</h3>
-            <p style="color: var(--text-muted);">
-                Cyphacore AI shall not be liable for indirect, incidental, or consequential damages,
-                including data loss, business interruption, or financial loss.
+            <h3>7. Warranty & Maintenance</h3>
+            <p>
+                <strong>Development:</strong> We provide a 30-day warranty period after delivery to fix any bugs related to our code. This does not cover issues caused by third-party updates (e.g., iOS updates, API changes) or client modifications.
+            </p>
+            <p>
+                <strong>Automation:</strong> Ongoing maintenance is provided only for active subscribers. If a subscription is cancelled, we are not responsible for the continued operation of the workflows.
             </p>
 
-            <h3>11. Changes to Terms</h3>
-            <p style="color: var(--text-muted);">
-                We reserve the right to update these Terms & Conditions at any time.
-                Continued use of our services constitutes acceptance of updated terms.
+            <h3>8. Confidentiality</h3>
+            <p>
+                We respect your privacy. All client data, business logic, and credentials shared with Cyphacore AI are treated as strictly confidential and will never be shared with third parties without your consent, except as required by law.
             </p>
 
-            <h3>12. Contact</h3>
-            <p style="color: var(--text-muted);">
-                If you have any questions regarding these terms, please contact us via the Contact page.
+            <h3>9. Limitation of Liability</h3>
+            <p>
+                Cyphacore AI shall not be liable for any indirect, incidental, or consequential damages, including data loss, business interruption, or lost profits, arising from the use of our software or services.
+            </p>
+
+            <h3>10. Termination</h3>
+            <p>
+                Either party may terminate the agreement with written notice. For Development Projects, the Client is liable for all work completed up to the termination date. For Subscriptions, cancellation stops the next billing cycle; no partial refunds are issued.
+            </p>
+
+            <h3>11. Contact</h3>
+            <p>
+                If you have questions regarding these terms, please contact us via our Contact Page.
             </p>
         </div>
     </section>

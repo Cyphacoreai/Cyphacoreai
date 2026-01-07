@@ -27,13 +27,24 @@
         
         /* Privacy Specific Styling */
         .privacy-content h3 {
-            color: var(--neon-pink); /* Using Pink to distinguish from Terms page */
-            margin-top: 2rem;
-            margin-bottom: 0.5rem;
+            color: var(--neon-pink);
+            margin-top: 2.5rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
         }
         .privacy-content p {
             line-height: 1.8;
             margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+        .privacy-content ul {
+            list-style: disc;
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+        }
+        .privacy-content li {
+            margin-bottom: 0.5rem;
         }
     </style>
 </head>
@@ -44,55 +55,68 @@
     <section style="padding: 10rem 2rem 5rem;">
         <div class="glass-card fade-in privacy-content" style="max-width: 900px; margin: 0 auto; padding: 4rem;">
             <h1 class="section-title" style="text-align: left; margin-bottom: 1rem;">Privacy <span class="gradient-text">Policy</span></h1>
-            <p style="color: var(--text-muted); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 2rem; margin-bottom: 2rem;">
+            <p style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 2rem; margin-bottom: 2rem;">
                 Last Updated: January 2025
             </p>
 
-            <h3>1. Data Collection</h3>
-            <p style="color: var(--text-muted);">
-                We collect data necessary to provide and improve our automation services, including usage statistics,
-                interaction logs, and account information. Personal identification is anonymized where possible
-                to protect user privacy.
+            <h3>1. Introduction</h3>
+            <p>
+                At Cyphacore AI, we are committed to protecting the confidentiality and security of our clients' intellectual property and data. This policy outlines how we handle information collected through our website, development services, and automation workflows.
             </p>
 
-            <h3>2. User Rights</h3>
-            <p style="color: var(--text-muted);">
-                You retain full ownership of the data provided to Cyphacore AI. You have the right to request access, correction,
-                deletion, or export of your personal data at any time by contacting our support team.
+            <h3>2. Information We Collect</h3>
+            <p>We collect two categories of data:</p>
+            <ul>
+                <li><strong>Client Business Data:</strong> Information necessary to build your project, including API keys, database credentials, design assets, and business logic requirements.</li>
+                <li><strong>Usage Data:</strong> Anonymized metrics regarding the performance of the websites and automation workflows we host or manage for you.</li>
+            </ul>
+
+            <h3>3. How We Use Your Data</h3>
+            <p>
+                Your data is used strictly for the purpose of delivering the agreed-upon services:
+            </p>
+            <ul>
+                <li>To design, develop, and deploy your Website, Mobile App, or Automation System.</li>
+                <li>To test and debug software functionality.</li>
+                <li>To process payments and manage your account subscription.</li>
+            </ul>
+
+            <h3>4. Code & IP Security</h3>
+            <p>
+                We treat your source code and business ideas as strict trade secrets. We utilize secure private repositories (GitHub/GitLab) with restricted access. Once a development project is handed over, Cyphacore AI does not retain rights to your proprietary data unless otherwise agreed for maintenance purposes.
             </p>
 
-            <h3>3. Security</h3>
-            <p style="color: var(--text-muted);">
-                We utilize military-grade encryption (AES-256) for all stored data and employ a zero-trust architecture
-                to ensure maximum security against unauthorized access and data breaches.
+            <h3>5. Third-Party Integrations</h3>
+            <p>
+                Our services often integrate with third-party tools (e.g., OpenAI, n8n, Firebase, AWS). Data transmitted to these providers via our workflows is subject to their respective privacy policies. We configure these integrations to transmit only the minimum data required to function.
             </p>
 
-            <h3>4. Third-Party Sharing</h3>
-            <p style="color: var(--text-muted);">
-                We do not sell your personal data to third parties. We may share data with trusted service providers
-                strictly for the purpose of operating our services (e.g., hosting, payment processing), bound by confidentiality agreements.
+            <h3>6. Data Retention</h3>
+            <p>
+                <strong>Development Files:</strong> We retain backups of project files for 12 months after project completion to assist with potential future updates, after which they may be archived or deleted.
+            </p>
+            <p>
+                <strong>Automation Logs:</strong> Execution logs for automation workflows are typically retained for 30 days for debugging purposes and then permanently deleted.
             </p>
 
-            <h3>5. Data Retention</h3>
-            <p style="color: var(--text-muted);">
-                We retain personal data only as long as necessary to provide our services and comply with legal obligations.
-                Upon account termination, data is deleted in accordance with our retention policy.
+            <h3>7. Your Rights</h3>
+            <p>
+                You have the right to request the deletion of your account, source code, and associated data from our servers at any time. Upon termination of services, we will securely destroy all access credentials we hold for your systems.
             </p>
 
-            <h3>6. Cookies & Tracking</h3>
-            <p style="color: var(--text-muted);">
-                We use cookies to enhance user experience, analyze site traffic, and personalize content. You can control
-                cookie preferences through your browser settings.
+            <h3>8. Security Measures</h3>
+            <p>
+                We employ industry-standard security practices, including:
             </p>
+            <ul>
+                <li>Encryption of sensitive credentials (API keys) at rest and in transit.</li>
+                <li>Zero-trust access policies for our development team.</li>
+                <li>Regular code reviews to ensure applications we build are free of known vulnerabilities.</li>
+            </ul>
 
-            <h3>7. Updates to Policy</h3>
-            <p style="color: var(--text-muted);">
-                We may update this Privacy Policy periodically. We will notify you of any significant changes by posting the new policy on this page.
-            </p>
-            
-            <h3>8. Contact Us</h3>
-             <p style="color: var(--text-muted);">
-                If you have questions about this Privacy Policy, please contact us via our Contact page.
+            <h3>9. Contact Us</h3>
+            <p>
+                If you have questions about how we handle your data or your project's security, please contact us via our Contact Page.
             </p>
         </div>
     </section>

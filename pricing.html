@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
-        /* --- Animation Core (Matches Site Physics) --- */
+        /* --- Animation Core --- */
         .fade-in {
             opacity: 0;
             transform: translateY(50px);
@@ -26,13 +26,19 @@
         }
 
         /* --- Pricing Specific Styles --- */
+        .pricing-section {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Standard 4-column grid for both sections */
         .pricing-grid-4 {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 2rem;
-            max-width: 1400px;
-            margin: 4rem auto;
             align-items: stretch;
+            margin-bottom: 6rem;
         }
 
         .pricing-card-enhanced {
@@ -41,6 +47,9 @@
             padding: 2.5rem;
             height: 100%;
             position: relative;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
         }
 
         /* --- POPULAR CARD DESIGN --- */
@@ -48,7 +57,7 @@
             background: linear-gradient(165deg, rgba(30, 30, 40, 0.9), rgba(10, 10, 15, 0.95));
             border: 1px solid rgba(255, 79, 255, 0.3);
             box-shadow: 0 20px 50px rgba(0,0,0, 0.5), 0 0 30px rgba(255, 79, 255, 0.15);
-            transform: scale(1.05); /* Slight lift */
+            transform: scale(1.05);
             z-index: 2;
         }
 
@@ -102,89 +111,149 @@
 
     <div id="navbar-placeholder"></div>
 
-    <section style="padding: 10rem 2rem 5rem;">
-        <h1 class="section-title fade-in">Our <span class="gradient-text">Automation Packages</span></h1>
-        <p class="fade-in" style="text-align: center; color: var(--text-muted); max-width: 600px; margin: 0 auto 4rem auto;">
-            Transparent, scalable pricing for integrating intelligent automation into your workflows.
+    <section style="padding: 10rem 2rem 5rem; text-align: center;">
+        <h1 class="section-title fade-in">Clear & Flexible <span class="gradient-text">Pricing</span></h1>
+        <p class="fade-in" style="color: var(--text-muted); max-width: 700px; margin: 0 auto;">
+            From building your first mobile app to deploying intelligent AI agents—choose the package that fits your growth.
         </p>
+    </section>
 
+    <section class="pricing-section">
+        <h2 class="fade-in" style="margin-bottom: 2rem; font-size: 2rem;">🚀 Build Packages <span style="font-size: 1rem; color: var(--text-muted); font-weight: normal;">(One-Time Build Cost)</span></h2>
+        
         <div class="pricing-grid-4">
-
             <div class="glass-card pricing-card-enhanced fade-in">
-                <h2>Basic</h2>
-                <h3 style="font-size: 2.5rem; margin-top: 1rem;">$60<span style="font-size: 1rem; color: var(--text-muted);"> Setup</span></h3>
-                <p style="color: var(--text-muted); margin-bottom: 1rem;">+ $20/mo maintenance</p>
-                <ul style="list-style: none; margin: 2rem 0; color: var(--text-main); flex-grow: 1; line-height: 2;">
-                    <li><i class="fas fa-check" style="color: var(--neon-purple); margin-right: 8px;"></i> 2 Automation Workflows</li>
-                    <li><i class="fas fa-check" style="color: var(--neon-purple); margin-right: 8px;"></i> Basic Reporting</li>
-                    <li style="opacity: 0.3;"><i class="fas fa-times" style="margin-right: 8px;"></i> API Integrations</li>
-                    <li style="opacity: 0.3;"><i class="fas fa-times" style="margin-right: 8px;"></i> Priority Support</li>
+                <div style="margin-bottom: 1.5rem;">
+                    <i class="fas fa-globe" style="font-size: 2rem; color: var(--neon-purple);"></i>
+                </div>
+                <h2>Website</h2>
+                <h3 style="font-size: 2.2rem; margin-top: 1rem;">$250<span style="font-size: 1rem; color: var(--text-muted);">+</span></h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">Landing Pages & Portfolios</p>
+                <ul style="list-style: none; margin: 2rem 0; color: var(--text-main); flex-grow: 1; line-height: 2; font-size: 0.9rem;">
+                    <li><i class="fas fa-check" style="color: var(--neon-purple); margin-right: 8px;"></i> Modern UI/UX</li>
+                    <li><i class="fas fa-check" style="color: var(--neon-purple); margin-right: 8px;"></i> SEO Optimized</li>
+                    <li><i class="fas fa-check" style="color: var(--neon-purple); margin-right: 8px;"></i> Contact Forms</li>
                 </ul>
-                <a href="contact.html" class="btn btn-outline" style="width: 100%; text-align: center;">Choose Basic</a>
+                <a href="contact.html" class="btn btn-outline" style="width: 100%; text-align: center;">Start Web</a>
             </div>
 
             <div class="glass-card pricing-card-enhanced fade-in">
-                <h2>Starter</h2>
-                <h3 style="font-size: 2.5rem; margin-top: 1rem;">$120<span style="font-size: 1rem; color: var(--text-muted);"> Setup</span></h3>
-                <p style="color: var(--text-muted); margin-bottom: 1rem;">+ $30/mo maintenance</p>
-                <ul style="list-style: none; margin: 2rem 0; color: var(--text-main); flex-grow: 1; line-height: 2;">
-                    <li><i class="fas fa-check" style="color: var(--neon-purple); margin-right: 8px;"></i> 6 Automation Workflows</li>
-                    <li><i class="fas fa-check" style="color: var(--neon-purple); margin-right: 8px;"></i> Monitoring & Reporting</li>
-                    <li><i class="fas fa-check" style="color: var(--neon-purple); margin-right: 8px;"></i> Email Support</li>
-                    <li style="opacity: 0.3;"><i class="fas fa-times" style="margin-right: 8px;"></i> API Integrations</li>
+                <div style="margin-bottom: 1.5rem;">
+                    <i class="fas fa-mobile-alt" style="font-size: 2rem; color: var(--neon-pink);"></i>
+                </div>
+                <h2>Mobile App</h2>
+                <h3 style="font-size: 2.2rem; margin-top: 1rem;">$600<span style="font-size: 1rem; color: var(--text-muted);">+</span></h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">Android & iOS MVP</p>
+                <ul style="list-style: none; margin: 2rem 0; color: var(--text-main); flex-grow: 1; line-height: 2; font-size: 0.9rem;">
+                    <li><i class="fas fa-check" style="color: var(--neon-pink); margin-right: 8px;"></i> Native/Cross-platform</li>
+                    <li><i class="fas fa-check" style="color: var(--neon-pink); margin-right: 8px;"></i> User Login System</li>
+                    <li><i class="fas fa-check" style="color: var(--neon-pink); margin-right: 8px;"></i> Play Store Upload</li>
                 </ul>
-                <a href="contact.html" class="btn btn-outline" style="width: 100%; text-align: center;">Choose Starter</a>
+                <a href="contact.html" class="btn btn-outline" style="width: 100%; text-align: center;">Start App</a>
             </div>
 
             <div class="glass-card pricing-card-enhanced pricing-card-popular-modern fade-in">
-                <div class="popular-badge-modern">POPULAR</div>
-                <h2 style="color: #fff;">Professional</h2>
-                <h3 style="font-size: 2.5rem; margin-top: 1rem; color: #fff;">$200<span style="font-size: 1rem; color: rgba(255,255,255,0.7);"> Setup</span></h3>
-                <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem;">+ $50/mo maintenance</p>
-                <ul style="list-style: none; margin: 2rem 0; color: #fff; flex-grow: 1; line-height: 2;">
-                    <li><i class="fas fa-check" style="color: #ff4fff; margin-right: 8px;"></i> Up to 12 Workflows</li>
-                    <li><i class="fas fa-check" style="color: #ff4fff; margin-right: 8px;"></i> Advanced Analytics</li>
-                    <li><i class="fas fa-check" style="color: #ff4fff; margin-right: 8px;"></i> API Integrations</li>
-                    <li><i class="fas fa-check" style="color: #ff4fff; margin-right: 8px;"></i> Priority Support</li>
+                <div class="popular-badge-modern">HOT</div>
+                <div style="margin-bottom: 1.5rem;">
+                    <i class="fas fa-brain" style="font-size: 2rem; color: #fff;"></i>
+                </div>
+                <h2 style="color: #fff;">AI Agent</h2>
+                <h3 style="font-size: 2.2rem; margin-top: 1rem; color: #fff;">$800<span style="font-size: 1rem; color: rgba(255,255,255,0.7);">+</span></h3>
+                <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem;">Custom Intelligence</p>
+                <ul style="list-style: none; margin: 2rem 0; color: #fff; flex-grow: 1; line-height: 2; font-size: 0.9rem;">
+                    <li><i class="fas fa-check" style="color: #ff4fff; margin-right: 8px;"></i> Trained on <strong>Your Data</strong></li>
+                    <li><i class="fas fa-check" style="color: #ff4fff; margin-right: 8px;"></i> Custom Chatbot (RAG)</li>
+                    <li><i class="fas fa-check" style="color: #ff4fff; margin-right: 8px;"></i> Embed on Website</li>
+                    <li><i class="fas fa-check" style="color: #ff4fff; margin-right: 8px;"></i> Zero Hallucinations</li>
                 </ul>
-                <a href="contact.html" class="btn btn-primary" style="width: 100%; text-align: center;">Choose Professional</a>
+                <a href="contact.html" class="btn btn-primary" style="width: 100%; text-align: center;">Build Agent</a>
             </div>
 
             <div class="glass-card pricing-card-enhanced fade-in">
-                <h2>Pro</h2>
-                <h3 style="font-size: 2.5rem; margin-top: 1rem;">$500<span style="font-size: 1rem; color: var(--text-muted);"> Setup</span></h3>
-                <p style="color: var(--text-muted); margin-bottom: 1rem;">+ $150/mo maintenance</p>
-                <ul style="list-style: none; margin: 2rem 0; color: var(--text-main); flex-grow: 1; line-height: 2;">
-                    <li><i class="fas fa-check" style="color: var(--neon-pink); margin-right: 8px;"></i> upto 20 custom Workflows</li>
-                    <li><i class="fas fa-check" style="color: var(--neon-pink); margin-right: 8px;"></i> Advanced AI Integration</li>
-                    <li><i class="fas fa-check" style="color: var(--neon-pink); margin-right: 8px;"></i> SLA & 24/7 Support</li>
-                    <li><i class="fas fa-check" style="color: var(--neon-pink); margin-right: 8px;"></i> Account Manager</li>
+                <div style="margin-bottom: 1.5rem;">
+                    <i class="fas fa-code-branch" style="font-size: 2rem; color: var(--neon-purple);"></i>
+                </div>
+                <h2>SaaS / SaaS</h2>
+                <h3 style="font-size: 2.2rem; margin-top: 1rem;">$1200<span style="font-size: 1rem; color: var(--text-muted);">+</span></h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">Full Business Systems</p>
+                <ul style="list-style: none; margin: 2rem 0; color: var(--text-main); flex-grow: 1; line-height: 2; font-size: 0.9rem;">
+                    <li><i class="fas fa-check" style="color: var(--neon-purple); margin-right: 8px;"></i> Python/Django Backend</li>
+                    <li><i class="fas fa-check" style="color: var(--neon-purple); margin-right: 8px;"></i> Admin Dashboard</li>
+                    <li><i class="fas fa-check" style="color: var(--neon-purple); margin-right: 8px;"></i> Database Design</li>
                 </ul>
-                <a href="contact.html" class="btn btn-primary" style="width: 100%; text-align: center;">Choose Pro</a>
+                <a href="contact.html" class="btn btn-outline" style="width: 100%; text-align: center;">Get Quote</a>
             </div>
-        </div>
-
-        <div class="fade-in" style="background: rgba(160, 32, 240, 0.05); border-radius: 20px; padding: 4rem; text-align: center; border: 1px solid var(--neon-purple); max-width: 1300px; margin: 6rem auto;">
-            <i class="fas fa-building" style="font-size: 3rem; color: var(--neon-pink); margin-bottom: 1.5rem;"></i>
-            <h2 style="font-size: 2.5rem; margin-bottom: 0.5rem;"><span class="gradient-text">Enterprise</span> Solutions</h2>
-            <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--text-muted);">Custom Pricing</h3>
-            <p style="font-size: 1.1rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 2rem auto;">
-                Tailored for large organizations with complex needs. Includes full custom development and dedicated support.
-            </p>
-            <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 2rem; margin-bottom: 3rem;">
-                <span><i class="fas fa-check-circle" style="color: var(--neon-pink);"></i> super advanced custom Workflows</span>
-                <span><i class="fas fa-check-circle" style="color: var(--neon-pink);"></i> Custom Engineering</span>
-                <span><i class="fas fa-check-circle" style="color: var(--neon-pink);"></i> On-Premise Support</span>
-            </div>
-            <a href="contact.html" class="btn btn-primary" style="padding: 1rem 3rem;">Contact Sales</a>
         </div>
     </section>
+
+    <section class="pricing-section">
+        <h2 class="fade-in" style="margin-bottom: 2rem; font-size: 2rem;">⚡ Automation Plans <span style="font-size: 1rem; color: var(--text-muted); font-weight: normal;">(Monthly Subscription)</span></h2>
+
+        <div class="pricing-grid-4">
+            <div class="glass-card pricing-card-enhanced fade-in">
+                <h2>Starter</h2>
+                <h3 style="font-size: 2rem; margin-top: 1rem;">$20<span style="font-size: 1rem; color: var(--text-muted);">/mo</span></h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">+ $60 Setup Fee</p>
+                <ul style="list-style: none; margin: 2rem 0; color: var(--text-main); flex-grow: 1; line-height: 2; font-size: 0.9rem;">
+                    <li><i class="fas fa-check" style="color: var(--neon-purple); margin-right: 8px;"></i> 2 Workflows</li>
+                    <li><i class="fas fa-check" style="color: var(--neon-purple); margin-right: 8px;"></i> Social Auto-Reply</li>
+                    <li style="opacity: 0.5;">No Custom API</li>
+                </ul>
+                <a href="contact.html" class="btn btn-outline" style="width: 100%; text-align: center;">Select</a>
+            </div>
+
+            <div class="glass-card pricing-card-enhanced fade-in">
+                <h2>Growth</h2>
+                <h3 style="font-size: 2rem; margin-top: 1rem;">$50<span style="font-size: 1rem; color: var(--text-muted);">/mo</span></h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">+ $120 Setup Fee</p>
+                <ul style="list-style: none; margin: 2rem 0; color: var(--text-main); flex-grow: 1; line-height: 2; font-size: 0.9rem;">
+                    <li><i class="fas fa-check" style="color: var(--neon-purple); margin-right: 8px;"></i> 6 Workflows</li>
+                    <li><i class="fas fa-check" style="color: var(--neon-purple); margin-right: 8px;"></i> CRM Integration</li>
+                    <li><i class="fas fa-check" style="color: var(--neon-purple); margin-right: 8px;"></i> Email Reporting</li>
+                </ul>
+                <a href="contact.html" class="btn btn-outline" style="width: 100%; text-align: center;">Select</a>
+            </div>
+
+            <div class="glass-card pricing-card-enhanced fade-in">
+                <h2>Business</h2>
+                <h3 style="font-size: 2rem; margin-top: 1rem;">$100<span style="font-size: 1rem; color: var(--text-muted);">/mo</span></h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">+ $200 Setup Fee</p>
+                <ul style="list-style: none; margin: 2rem 0; color: var(--text-main); flex-grow: 1; line-height: 2; font-size: 0.9rem;">
+                    <li><i class="fas fa-check" style="color: var(--neon-purple); margin-right: 8px;"></i> 12 Workflows</li>
+                    <li><i class="fas fa-check" style="color: var(--neon-purple); margin-right: 8px;"></i> API Connections</li>
+                    <li><i class="fas fa-check" style="color: var(--neon-purple); margin-right: 8px;"></i> AI Text Generation</li>
+                </ul>
+                <a href="contact.html" class="btn btn-outline" style="width: 100%; text-align: center;">Select</a>
+            </div>
+
+            <div class="glass-card pricing-card-enhanced fade-in">
+                <h2>Elite</h2>
+                <h3 style="font-size: 2rem; margin-top: 1rem;">$200<span style="font-size: 1rem; color: var(--text-muted);">/mo</span></h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">+ $500 Setup Fee</p>
+                <ul style="list-style: none; margin: 2rem 0; color: var(--text-main); flex-grow: 1; line-height: 2; font-size: 0.9rem;">
+                    <li><i class="fas fa-check" style="color: var(--neon-pink); margin-right: 8px;"></i> 25 Workflows</li>
+                    <li><i class="fas fa-check" style="color: var(--neon-pink); margin-right: 8px;"></i> Custom LLM Integration</li>
+                    <li><i class="fas fa-check" style="color: var(--neon-pink); margin-right: 8px;"></i> 24/7 Priority Support</li>
+                </ul>
+                <a href="contact.html" class="btn btn-outline" style="width: 100%; text-align: center;">Select</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="fade-in" style="background: rgba(160, 32, 240, 0.05); border-radius: 20px; padding: 4rem; text-align: center; border: 1px solid var(--neon-purple); max-width: 1300px; margin: 0 auto 6rem auto;">
+        <i class="fas fa-city" style="font-size: 3rem; color: var(--neon-pink); margin-bottom: 1.5rem;"></i>
+        <h2 style="font-size: 2.5rem; margin-bottom: 0.5rem;"><span class="gradient-text">Enterprise</span> Solutions</h2>
+        <p style="font-size: 1.1rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 2rem auto;">
+            Need a full digital transformation? We offer custom contracts that combine high-end App Development with Enterprise-grade Automation.
+        </p>
+        <a href="contact.html" class="btn btn-primary" style="padding: 1rem 3rem;">Contact Sales</a>
+    </div>
 
     <div id="footer-placeholder"></div>
 
     <a href="contact.html" class="floating-cta">
         <i class="fas fa-comment-dots"></i>
-        Need Custom Pricing?
+        Get a Quote
     </a>
 
     <script src="assets/js/app.js"></script>
@@ -211,6 +280,4 @@
         }, 300);
     </script>
 </body>
-
 </html>
-
