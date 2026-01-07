@@ -1,34 +1,34 @@
-/* --- LIVE CURRENCY CONVERTER --- */
-// 1. Detects User Location
-// 2. Fetches TODAY'S Exchange Rate from API
-// 3. Converts & Formats the Price
+/* --- LIVE CURRENCY CONVERTER (VPN-Friendly Version) --- */
 
 async function updateCurrency() {
     try {
-        // --- STEP 1: Get User's Currency Code (e.g., "BDT", "EUR") ---
-        const ipResponse = await fetch('https://ipapi.co/json/');
-        const ipData = await ipResponse.json();
-        const userCurrency = ipData.currency;
+        console.log("Creating currency request...");
 
-        // If user is in US or API fails to get currency, stop (prices stay in USD)
-        if (!userCurrency || userCurrency === 'USD') return;
+        // 1. Get User Location Data (Using ipwhois.app which is more VPN friendly)
+        const response = await fetch('https://ipwhois.app/json/');
+        const data = await response.json();
+        
+        console.log("Detected Country:", data.country);
+        console.log("Detected Currency:", data.currency);
 
+        const userCurrency = data.currency; // e.g., "BDT", "EUR", "USD"
 
-        // --- STEP 2: Get LIVE Exchange Rates (Base: USD) ---
-        // We use ExchangeRate-API (Free, No Key Required)
+        // If something went wrong or user is in US, stop here.
+        if (!userCurrency || userCurrency === 'USD') {
+            console.log("User is in US or API failed. Keeping USD.");
+            return;
+        }
+
+        // 2. Get LIVE Exchange Rates (Base: USD)
         const rateResponse = await fetch('https://open.er-api.com/v6/latest/USD');
         const rateData = await rateResponse.json();
         
-        // Get the specific rate for the user (e.g., 122.5 for BDT)
         const liveRate = rateData.rates[userCurrency];
+        console.log("Exchange Rate for " + userCurrency + ": " + liveRate);
 
-        // If the API doesn't support this currency, stop.
         if (!liveRate) return;
 
-
-        // --- STEP 3: Define Symbols & Formatting ---
-        // The API gives us the number (122), but we still need to tell it 
-        // what symbol to use (€, ৳, £) and where to put it.
+        // 3. Define Symbols & Formatting
         const formattingConfig = {
             'EUR': { symbol: '€', position: 'before' },
             'GBP': { symbol: '£', position: 'before' },
@@ -42,20 +42,14 @@ async function updateCurrency() {
             'BRL': { symbol: 'R$', position: 'before' },
         };
 
-        // If we have a custom symbol, use it. Otherwise, use the text code (e.g. "SGD 100")
         const format = formattingConfig[userCurrency] || { symbol: userCurrency + ' ', position: 'before' };
 
-
-        // --- STEP 4: Update All Prices on Page ---
+        // 4. Update Prices
         document.querySelectorAll('.dynamic-price').forEach(el => {
-            // Get the original USD price from the HTML
             const usdAmount = parseFloat(el.getAttribute('data-usd'));
-
-            // Calculate using the LIVE rate
-            // We use Math.ceil to round up to the nearest whole number for cleaner pricing
+            
+            // Round up for cleaner prices (e.g. 122.5 -> 123)
             const convertedAmount = Math.ceil(usdAmount * liveRate);
-
-            // Apply formatting (add commas for thousands, e.g., 12,000)
             const formattedNumber = convertedAmount.toLocaleString();
 
             if (format.position === 'before') {
@@ -64,12 +58,13 @@ async function updateCurrency() {
                 el.textContent = `${formattedNumber}${format.symbol}`;
             }
         });
+        
+        console.log("Prices updated successfully.");
 
     } catch (error) {
         console.error("Currency converter error:", error);
-        // If anything breaks, the site simply stays in USD (default).
     }
 }
 
-// Run the function
+// Run immediately
 updateCurrency();
